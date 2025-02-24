@@ -1,3 +1,4 @@
+import Upload from "@/components/upload";
 import { auth, currentUser } from "@clerk/nextjs/server";
 
 export default async function HomePage() {
@@ -6,8 +7,11 @@ export default async function HomePage() {
 
   if (!userId) return redirectToSignIn();
   return (
-    <div className="p-4">
-      Hello {user?.firstName ?? user?.emailAddresses[0]?.emailAddress}
-    </div>
+    <>
+      <div>
+        Hello {user?.firstName ?? user?.emailAddresses[0]?.emailAddress}
+      </div>
+      <Upload />
+    </>
   );
 }

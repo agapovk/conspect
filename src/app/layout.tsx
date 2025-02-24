@@ -23,16 +23,20 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" className={`${GeistSans.variable}`}>
         <body>
-          <header className="flex h-16 items-center justify-between gap-4 border-b p-4">
-            <h1 className="text-xl uppercase">Logo: Conspect</h1>
-            <SignedOut>
-              <SignInButton />
-            </SignedOut>
-            <SignedIn>
-              <UserButton />
-            </SignedIn>
+          <header className="border-b">
+            <div className="flex h-16 items-center px-4">
+              <span>_conSPECT</span>
+              <div className="ml-auto flex items-center space-x-4">
+                <SignedOut>
+                  <SignInButton />
+                </SignedOut>
+                <SignedIn>
+                  <UserButton />
+                </SignedIn>
+              </div>
+            </div>
           </header>
-          {children}
+          <div className="flex-1 space-y-4 p-4">{children}</div>
         </body>
       </html>
     </ClerkProvider>
