@@ -1,4 +1,4 @@
-import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs/server";
 import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 
@@ -22,23 +22,22 @@ export const ourFileRouter = {
       // This code runs on your server before upload
 
       // const user = await auth(req);
-      const user = await currentUser();
+      const user = await auth();
 
       // If you throw, the user will not be able to upload
       // eslint-disable-next-line @typescript-eslint/only-throw-error
-      if (!user) throw new UploadThingError("Unauthorized");
+      if (!user.userId) throw new UploadThingError("Unauthorized");
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
-      return { user };
+      return { userId: user.userId };
     })
     .onUploadComplete(async ({ metadata, file }) => {
       // This code RUNS ON YOUR SERVER after upload
-      console.log("Upload complete for userId:", metadata.user.id);
-
-      console.log("file url", file.url);
+      console.log("Upload complete for userId:", metadata.userId);
+      console.log("file url", file.ufsUrl);
 
       // !!! Whatever is returned here is sent to the clientside `onClientUploadComplete` callback
-      return { uploadedBy: metadata.user.id };
+      return { uploadedBy: metadata.userId };
     }),
 } satisfies FileRouter;
 
