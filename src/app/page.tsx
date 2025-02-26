@@ -11,7 +11,7 @@ export default async function HomePage() {
       clerkUserId: userId,
     },
     include: {
-      Scheme: true,
+      schemes: true,
     },
   });
   if (!user) return <div>Could not find user</div>;
@@ -22,9 +22,9 @@ export default async function HomePage() {
         Hello {user.firstName ?? user.email}
         <Upload />
       </div>
-      <h3 className="text-lg">User images</h3>
+      <h3 className="text-xl">User images</h3>
       <ul>
-        {user.Scheme.map((s) => (
+        {user.schemes.map((s) => (
           <li key={s.id}>- {s.name}</li>
         ))}
       </ul>

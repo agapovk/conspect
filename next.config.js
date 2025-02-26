@@ -10,7 +10,7 @@ const config = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "<APP_ID>.ufs.sh",
+        hostname: "yvffxe2a3g.ufs.sh",
         pathname: "/f/*",
       },
     ],
